@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# Product model specs- Tests for the presence of 'Name','Unit Price', 'Quantity', 'Category ID' in the Product Model
 RSpec.describe Product, type: :model do
   describe "validations" do 
     it "should not create a product without a name" do
@@ -7,7 +7,7 @@ RSpec.describe Product, type: :model do
     @category.name = "Apparel"
     @category.save
     @product = @category.products.create(name: nil,description: "Anything",image: "Anything", price_cents: 2, 
-                                        quantity:2, category_id: @category.id  )
+      quantity:2, category_id: @category.id  )
     expect(@product.name).to be_nil
     end
     it "should not create a product without a price" do
@@ -15,7 +15,7 @@ RSpec.describe Product, type: :model do
       @category.name = "Apparel"
       @category.save
       @product = @category.products.create(name: "Anything",description: "anything",image: "Anything", price_cents: nil, 
-                                          quantity:2, category_id: @category.id  )
+        quantity:2, category_id: @category.id  )
       expect(@product.price_cents).to be_nil
     end
 
