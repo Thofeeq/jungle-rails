@@ -10,13 +10,14 @@ RSpec.describe Product, type: :model do
       quantity:2, category_id: @category.id  )
     expect(@product.name).to be_nil
     end
+
     it "should not create a product without a price" do
       @category = Category.new
       @category.name = "Apparel"
       @category.save
-      @product = @category.products.create(name: "Anything",description: "anything",image: "Anything", price_cents: nil, 
+      @product = @category.products.create(name: "Anything",description: "anything",image: "Anything", price: nil, 
         quantity:2, category_id: @category.id  )
-      expect(@product.price_cents).to be_nil
+      expect(@product).to_not be_valid
     end
 
     it "should not create a product without quantity specified" do
@@ -25,13 +26,13 @@ RSpec.describe Product, type: :model do
       @category.save
       @product = @category.products.create(name: "Anything",description: "Anything",image: "Anything", price_cents: 2, 
         quantity:nil, category_id: @category.id  )
-      expect(@product.quantity).to be_nil
+      expect(@product).to_not be_valid
       end
 
     it "should not create a product without category assigned" do
       @product = Product.new(name: "Anything",description: "Anything",image: "Anything", price_cents: 2, 
         quantity:2, category_id: nil )
-      expect(@product.category_id).to be_nil
+      expect(@product).to_not be_valid
       end
 
     it "should find the expect errors" do
