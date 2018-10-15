@@ -45,8 +45,14 @@ RSpec.describe User, type: :model do
     password: "test", password_confirmation: "test" )
     expect(@user).to_not be_valid
     end
-    
-    it "" do
+  end
+
+  describe '.authenticate_with_credentials' do
+    it "Should login the user regardless of whitespacing on the email" do
+      @user = User.create(first_name:"Anything",last_name: "Anything", email: "test@test.test",
+      password: "test123", password_confirmation: "test123" ) 
+      success = User.authenticate_with_credentials(@user.email, @user.password)
+      puts success    
     end
   end
 end
