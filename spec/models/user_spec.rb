@@ -33,10 +33,20 @@ RSpec.describe User, type: :model do
       password: "test", password_confirmation: "test" )
       expect(@user).to_not be_valid      
     end
+
     it "Should have an email" do 
       @user = User.create(first_name:"Anything",last_name: "Anything", email: nil,
       password: "test", password_confirmation: "test" )
       expect(@user).to_not be_valid      
+    end
+
+    it "Should have a password with MINIMUM LENGTH of 6" do
+    @user = User.create(first_name:"Anything",last_name: "Anything", email: "Anything",
+    password: "test", password_confirmation: "test" )
+    expect(@user).to_not be_valid
+    end
+    
+    it "" do
     end
   end
 end
