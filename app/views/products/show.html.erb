@@ -40,7 +40,6 @@
     <% end %>
     <div class="row">
       <div class="col-lg-12">
-        <% puts "REVIEW LENGTH: " + @product.reviews.empty?.to_s %>
         <% @product.reviews.reverse_each do |review| %>
           <p>Rating (Out of 5): <%= review.rating %> </p>
           <p> Description :  <%=review.description %> </p>
