@@ -7,11 +7,13 @@ class User < ActiveRecord::Base
   validates :email, presence: true 
   validates :password, length: {minimum: 6}
 
-  def authenticate_with_credentials (email,password){
-  user = User.find_by_email(email)
-  if user.authenticate(password)
-    return user
-  else
-    return nil 
-  }
+  def self.authenticate_with_credentials (email,password)
+    email = email.delete!(" ").downcase!
+    user = User.where("lower(email) = ?", email).first
+    if user.authenticate(password)
+      return user
+    else
+      return nil 
+    end
+  end
 end
